@@ -1,0 +1,12 @@
+1. access 함수
+#include <unistd.h>
+int access(const char *pathname, int mode); 
+ - 파일 또는 디렉토리의 사용자 권한 체크
+ - mode 변수 mask 종류
+	* F_OK : 파일 존재 여부
+	* R_OK : 파일 존재 여부, 읽기 권한 여부
+	* W_OK : 파일 존재 여부, 쓰기 권한 여부
+	* X_OK : 파일 존재 여부, 실행 권한 여부
+	* mode 변수가 들어갈 곳에 비트 연산으로 여러가지를 한번에 체크할 수 있다. (mode = R_OK | W_OK)
+ - 리턴값
+	* 성공하면 0, 실패하면 -1을 반환한다.
