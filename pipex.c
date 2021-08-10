@@ -2,12 +2,28 @@
 
 int	main(void)
 {
-	int test;
+	int test=20;
+	pid_t pid;
 
-	test = unlink("test.txt");
-	printf("unlink test: %d\n", test);
-	// test = access("here.txt", F_OK);
-	// printf("F_OK (exist): %d\n", test);
-
+	pid = fork();
+	if (pid == 0)
+		test++;
+	else
+	{
+		printf("parents process pid : %d\n", pid);
+		test--;
+	}
+	
+	if (pid == -1)
+		printf("child process create failed\n");
+	else if (pid == 0)
+		printf("child process : %d\n", test);
+	else
+	{
+		printf("parents process pid : %d\n", pid);
+		printf("parents process : %d\n", test);
+	}
+	
+		
 	return (EXIT_SUCCESS);
 }

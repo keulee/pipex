@@ -35,3 +35,55 @@ ssize_t read(int fildes, void *buf, size_t nbyte);
 #include <unistd.h>
 ssize_t write(int fildes, const void *buf, size_t nbyte);
 
+6. malloc
+#include <stdlib.h>
+void *malloc(size_t size);
+
+7. waitpid
+#include <sys/wait.h>
+pid_t waitpid(pid_t pid, int *stat_loc, int options);
+- 프로세스 종료 상태를 리턴해 주는 함수
+- 자식 프로세스를 기다릴 때 사용하는 함수 (자식 프로세스의 종료 상태를 회수할 때 사용)
+- wait함수와 다른 점 : 특정한 자식 프로세스를 기다리게 할 수 있다.
+- waitpid 함수의 첫번째 인자
+	* pid가 -1일 경우 (pid == -1) : 임의의 자식 프로세스를 기다림
+	* pid가 0보다 클 경우 (pid > 0) : 프로세스 ID가 pid인 프로세스를 기다림
+	* pid가 -1보다 작을 경우 (pid < -1) : 프로세스 그룹 ID가 pid의 절댓값과 같은 자식 프로세스를 기다림
+	* pid가 0일 경우 (pid == 0) : waitpid를 호출한 프로세스의 프로세스 그룹 PID와 같은 프로세스 그룹 ID를 가진 프로세스를 기다림
+- waitpid 함수의 두번째 인자
+	* 자식 프로세스가 정상적으로 종료 : WIFEXITED(statloc) 매크로가 true를 반환
+	* 자식 프로세스가 비정상적으로 종료 : WIFSIGNALED(statloc) 매크로가 true를 반환
+								 비정상 종료 이유를 WTERMSIG(statloc) 매크로를 사용하여 구할 수 있음
+	* waitpid 함수 오류 : ECHILD -> 호출자의 자식 프로세스가 없는 경우
+						EINTR -> 시스템 콜이 인터럽트 되었을 때
+- waitpid 함수의 세번째 인자
+	* WCONTINUED : 중단 되었다가 재개된 자식 프로세스의 상태를 받음
+	* WNOHANG : 기다리는 PID가 종료되지 않아서 즉시 종료 상태를 회수할 수 없는 상황에서 호출자는 차단되지 않고 반환값으로 0을 받음
+	* WUNTRACED : 중단된 자식 프로세스의 상태를 받음
+- 리턴값
+	* 성공시 : 프로세스 ID
+	* 오류 발생시 : -1
+	* 그 외 : 0
+
+8. wait
+#include <sys/wait.h>
+pid_t wait(int *stat_loc);
+- 자식 프로세스 작업이 끝날 때까지 대기하며, 자식 프로세스가 종료한 상태를 구함.
+- 인수 : 자식 프로세스 종료 상태
+- 리턴값 : 종료된 자식 프로세스 ID
+- stat_loc 매크로
+	* WIFEXITED : 자식 프로세스가 정상적으로 종료되었다면 true
+	* WIFSIGNALED : 자식 프로세스가 시그널에 의해 종료되었다면 true
+	* WIFSTOPPED : 자식 프로세스가 중단되었다면 true
+	* WEXITSTATUS : 자식 프로세스가 종료되었을 때 반환한 값
+		ex) if (WIFEXITED(stat_loc))
+
+9. fork
+#include <unistd.h>
+pid_t fork(void);
+- 현재 실행되는 프로세스에 대해 복사본 프로세스를 생성.
+- 부모 프로세스(원본 프로세스) : fork 함수의 반환값은 자식 프로세스의 ID
+- 자식 프로세스(원본 프로세스에서 fork로 생성한 새로운 프로세스) : fork 함수의 반환값은 0
+- 리턴값
+	* 성공시 : 프로세스 ID 반환
+	* 실패시 : -1
