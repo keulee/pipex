@@ -1,7 +1,9 @@
 #include "./includes/pipex.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
+	(void)ac;
+	(void)av;
 	int test=20;
 	pid_t pid;
 
