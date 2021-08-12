@@ -145,3 +145,18 @@ int execve(const char *path, char *const argv[], char *const envp[]);
 - 리턴값
 	* 없음
 	* 바이너리 교체 실패 시 : -1 
+
+14. perror
+#include <stdio.h>
+void perror(const char *s);
+- 오류 메시지를 출력한다.
+- 리턴값
+	* 없음
+
+15. strerror
+#include <string.h>
+char *strerror(int errnum);
+- 인자를 오류 번호로 받아, 오류 메시지 문자열을 가리키는 포인터를 얻어온다.
+- 리턴값
+	* 오류 번호에 해당하는 오류 문자열을 가리키는 포인터 : 이때 리턴되는 포인터는 문자열 리터럴을 가리키고 있기 때문에 그 내용이 바뀔 수 없다.
+	(strerror에 의해 출력되는 오류 메시지는 현재 사용중인 컴파일러나 플랫폼에 따라 다를 수 있다.)
