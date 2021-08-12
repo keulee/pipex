@@ -118,7 +118,7 @@ int dup(int fildes);
 #include <unistd.h>
 int dup2(int fildes, int fildes2);
 - files : 복사할 파일 디스크립터
-- files2 : 복사된 파일 디스크립터 번호
+- files2 : 복사된 파일 디스크립터 번호 
 - 새 서술자의 값을 fd2로 지정
 - 만약 fd2가 열려있을 시, fd2를 닫은 후 복제
 - dup가 돌려주는 파일 서술자는 가장 낮은 서술자를 반환
