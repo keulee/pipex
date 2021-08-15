@@ -2,7 +2,8 @@
 
 int	main(int ac, char **av, char **en)
 {
-	t_info info;
+	t_info	info;
+	int		pid;
 	// (void)ac;
 	(void)en;
 	(void)av;
@@ -11,6 +12,28 @@ int	main(int ac, char **av, char **en)
 	if (pipe(info.fd_pipe) == -1)
 		ft_exit_msg("pipe failed");
 	info.fd_infile = open(av[1], O_RDONLY);
+	if (info.fd_infile < 0)
+		ft_exit_msg("infile doesn't exist");
+	info.fd_outfile = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 777);
+	pid = fork();
+	if (pid == -1)
+		ft_exit_msg("fork error");
+	if (pid == 0)
+	{
+		printf("child\n");
+		close(info.fd_pipe[0]); //pipe[0] -> read pipe[1] -> write
+		dup2(info.fd_pipe[1], STDOUT_FILENO); //0 : STDin, 1 : STDout
+		close(info.fd_pipe[1]);
+		dup2(info.fd_infile, STDIN_FILENO);
+	}
+	else if (pid > 0)
+	{
+		// wait(0);
+		printf("parents\n");
+		close(info.fd_pipe[1]); //pipe[0] -> read pipe[1] -> write
+		dup2(info.fd_pipe[0], STDIN_FILENO);
+		close(info.fd_pipe[0]);
+	}
 	
 
 	// int fd[2];

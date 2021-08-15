@@ -15,7 +15,7 @@ typedef	struct s_info{
 }			t_info;
 
 void	ft_exit_msg(char *str);
-void	ft_putchar(char c);
-void	ft_putstr(char *str);
+void	ft_putchar(const char c);
+void	ft_putstr(const char *str);
 
 #endif
