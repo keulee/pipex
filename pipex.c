@@ -1,14 +1,21 @@
 #include "./includes/pipex.h"
 
-int	main(int ac, char **av, char **en)
+int	main(int ac, char **av, char **env)
 {
 	t_info	info;
 	int		pid;
-	// (void)ac;
-	(void)en;
-	(void)av;
+	char *str1[2];
+	str1[0] = "/bin/ls";
+	str1[1] = NULL;
+
+	char *str2[2];
+	str2[0] = "/bin/cat";
+	str2[1] = NULL;
+
+	// (void)env;
 	if (ac != 5)
 		ft_exit_msg("Usage: ./pipex file1 cmd1 cmd2 file2");
+	info.env = env;
 	if (pipe(info.fd_pipe) == -1) // if success, fd_pipe[0]는 파이프의 읽기 끝단을 의미하는 파일 디스크립터가 되고, fd_pipe[1]은 파이프의 쓰기 끝단을 의미하는 파일 디스크립터가 된다.
 		ft_exit_msg("pipe failed");
 	info.fd_infile = open(av[1], O_RDONLY);
@@ -18,65 +25,35 @@ int	main(int ac, char **av, char **en)
 	pid = fork();
 	if (pid == -1)
 		ft_exit_msg("fork error");
-	if (pid == 0)
+	else if (pid == 0)
 	{
 		printf("child\n");
 		close(info.fd_pipe[0]); //pipe[0] -> read / pipe[1] -> write
 		dup2(info.fd_pipe[1], STDOUT_FILENO); //0 : STDin, 1 : STDout
 		close(info.fd_pipe[1]);
 		dup2(info.fd_infile, STDIN_FILENO);
+		if (execve("/bin/ls", str1, env) == -1)
+		{
+			ft_exit_msg("cmd not found");
+		}
 	}
 	else if (pid > 0)
 	{
-		// wait(0);
+		int value;
+		value = waitpid(pid, &info.pid_status, 0);
+		if (WIFEXITED(info.pid_status) == 0)
+			exit(1); 
+		printf("pid status : %d\n", info.pid_status);
+		printf("waitpid : %d\n", value);
 		printf("parents\n");
 		close(info.fd_pipe[1]); //pipe[0] -> read / pipe[1] -> write
 		dup2(info.fd_pipe[0], STDIN_FILENO);
 		close(info.fd_pipe[0]);
 		dup2(info.fd_outfile, STDOUT_FILENO);
+		if (execve("/bin/cat", str2, env) == -1)
+		{
+			ft_exit_msg("cmd not found");
+		}
 	}
-	
-
-	// int fd[2];
-	// int	pid;
-	// if (pipe(fd) == -1)
-	// {
-	// 	perror("pipe");
-	// 	exit(1);
-	// }
-	// pid = fork();
-	// if (pid == -1)
-	// {
-	// 	perror("fork");
-	// 	exit(1);
-	// }
-	// else if (pid == 0)
-	// {
-	// 	close(fd[1]); //쓰기 파이프를 닫아 읽기용으로 사용 (출력부분 필요없음)
-	// 	if (fd[0] != 0) //표준 입력이 아니면
-	// 	{
-	// 		dup2(fd[0], 0); //표준 입력으로 복사
-	// 		close(fd[0]);
-	// 	}
-	// 	execlp("cat", "cat", av[4], (char *)NULL);
-	// 	exit(1);
-	// }
-	// else
-	// {
-	// 	close(fd[0]); //파이프 입력부분 필요없음
-	// 	//파이프의 출력 부분을 표준 출력으로 복사한다. 따라서 부모 프로세스에서 무언가를 출력하면,
-	// 	//파이프를 통해 출력된다.
-	// 	if (fd[1] != 1)
-	// 	{
-	// 		dup2(fd[1], 1);
-	// 		close(fd[1]);
-	// 	}
-	// 	execlp(av[1], av[1], "wc", (char *)NULL);
-	// 	// wait(pid);
-	// 	exit(0);
-	// }
-	
-
-		
 	return (EXIT_SUCCESS);
 }
