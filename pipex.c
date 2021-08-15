@@ -9,7 +9,7 @@ int	main(int ac, char **av, char **en)
 	(void)av;
 	if (ac != 5)
 		ft_exit_msg("Usage: ./pipex file1 cmd1 cmd2 file2");
-	if (pipe(info.fd_pipe) == -1)
+	if (pipe(info.fd_pipe) == -1) // if success, fd_pipe[0]는 파이프의 읽기 끝단을 의미하는 파일 디스크립터가 되고, fd_pipe[1]은 파이프의 쓰기 끝단을 의미하는 파일 디스크립터가 된다.
 		ft_exit_msg("pipe failed");
 	info.fd_infile = open(av[1], O_RDONLY);
 	if (info.fd_infile < 0)
@@ -21,7 +21,7 @@ int	main(int ac, char **av, char **en)
 	if (pid == 0)
 	{
 		printf("child\n");
-		close(info.fd_pipe[0]); //pipe[0] -> read pipe[1] -> write
+		close(info.fd_pipe[0]); //pipe[0] -> read / pipe[1] -> write
 		dup2(info.fd_pipe[1], STDOUT_FILENO); //0 : STDin, 1 : STDout
 		close(info.fd_pipe[1]);
 		dup2(info.fd_infile, STDIN_FILENO);
@@ -30,9 +30,10 @@ int	main(int ac, char **av, char **en)
 	{
 		// wait(0);
 		printf("parents\n");
-		close(info.fd_pipe[1]); //pipe[0] -> read pipe[1] -> write
+		close(info.fd_pipe[1]); //pipe[0] -> read / pipe[1] -> write
 		dup2(info.fd_pipe[0], STDIN_FILENO);
 		close(info.fd_pipe[0]);
+		dup2(info.fd_outfile, STDOUT_FILENO);
 	}
 	
 

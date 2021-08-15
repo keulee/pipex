@@ -1,0 +1,16 @@
+total 2664
+drwxr-xr-x  15 keulee  staff      480  8 15 18:58 .
+drwxr-xr-x   9 keulee  staff      288  8 15 18:06 ..
+drwxr-xr-x  15 keulee  staff      480  8 15 18:58 .git
+-rw-r--r--   1 keulee  staff        9  8  8 03:32 .gitignore
+-rw-r--r--   1 keulee  staff      347  8 15 16:58 Makefile
+-rw-r--r--   1 keulee  staff       25  8  8 03:25 README.md
+-rw-r--r--   1 keulee  staff  1319642  8  8 03:25 en.subject.pdf
+-rw-r--r--   1 keulee  staff      109  8 15 17:48 ft_exit_msg.c
+-rw-r--r--   1 keulee  staff       83  8 15 17:48 ft_putchar.c
+-rw-r--r--   1 keulee  staff      142  8 15 17:48 ft_putstr.c
+drwxr-xr-x   3 keulee  staff       96  8  8 03:29 includes
+-rw-r--r--   1 keulee  staff       10  8 15 21:30 input
+-rw-r--r--   1 keulee  staff     7417  8 13 16:53 note.txt
+-rw-r--r--   1 keulee  staff        0  8 15 21:31 output
+-rw-r--r--   1 keulee  staff     2071  8 15 21:28 pipex.c
