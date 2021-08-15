@@ -2,13 +2,17 @@
 
 int	main(int ac, char **av, char **en)
 {
+	t_info info;
 	// (void)ac;
 	(void)en;
 	(void)av;
 	if (ac != 5)
-	{
 		ft_exit_msg("Usage: ./pipex file1 cmd1 cmd2 file2");
-	}
+	if (pipe(info.fd_pipe) == -1)
+		ft_exit_msg("pipe failed");
+	info.fd_infile = open(av[1], O_RDONLY);
+	
+
 	// int fd[2];
 	// int	pid;
 	// if (pipe(fd) == -1)

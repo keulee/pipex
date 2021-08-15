@@ -8,9 +8,11 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-typedef	struct s_info {
-	int fd;
-}	s_info;
+typedef	struct s_info{
+	int fd_infile;
+	int fd_outfile;
+	int	fd_pipe[2];
+}			t_info;
 
 void	ft_exit_msg(char *str);
 void	ft_putchar(char c);
