@@ -23,5 +23,9 @@ typedef	struct s_info{
 void	ft_exit_msg(char *str);
 void	ft_putchar(const char c);
 void	ft_putstr(const char *str);
+char	**ft_split(char const *s, char c);
+void	*ft_calloc(size_t count, size_t size);
+size_t	ft_strlcpy(char *restrict dest, const char *restrict src, size_t size);
+void	ft_bzero(void *s, size_t n);
 
 #endif

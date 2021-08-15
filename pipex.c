@@ -5,7 +5,7 @@ int	main(int ac, char **av, char **env)
 	t_info	info;
 	int		pid;
 	char *str1[2];
-	str1[0] = "/bin/ls";
+	str1[0] = "/bin/cat";
 	str1[1] = NULL;
 
 	char *str2[2];
@@ -32,7 +32,8 @@ int	main(int ac, char **av, char **env)
 		dup2(info.fd_pipe[1], STDOUT_FILENO); //0 : STDin, 1 : STDout
 		close(info.fd_pipe[1]);
 		dup2(info.fd_infile, STDIN_FILENO);
-		if (execve("/bin/ls", str1, env) == -1)
+		info.cmd1 = ft_split(av[2], ' ');
+		if (execve("/bin/cat", info.cmd1, env) == -1)
 		{
 			ft_exit_msg("cmd not found");
 		}
@@ -42,7 +43,7 @@ int	main(int ac, char **av, char **env)
 		int value;
 		value = waitpid(pid, &info.pid_status, 0);
 		if (WIFEXITED(info.pid_status) == 0)
-			exit(1); 
+			exit(1);
 		printf("pid status : %d\n", info.pid_status);
 		printf("waitpid : %d\n", value);
 		printf("parents\n");
@@ -50,7 +51,8 @@ int	main(int ac, char **av, char **env)
 		dup2(info.fd_pipe[0], STDIN_FILENO);
 		close(info.fd_pipe[0]);
 		dup2(info.fd_outfile, STDOUT_FILENO);
-		if (execve("/bin/cat", str2, env) == -1)
+		info.cmd2 = ft_split(av[3], ' ');
+		if (execve("/bin/cat", info.cmd2, env) == -1)
 		{
 			ft_exit_msg("cmd not found");
 		}
