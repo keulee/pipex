@@ -1,6 +1,7 @@
 NAME = pipex
 
-SRCS = pipex.c
+SRCS = pipex.c \
+		ft_putchar.c ft_putstr.c ft_exit_msg.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -8,5 +8,12 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+typedef	struct s_info {
+	int fd;
+}	s_info;
+
+void	ft_exit_msg(char *str);
+void	ft_putchar(char c);
+void	ft_putstr(char *str);
 
 #endif
