@@ -1,4 +1,29 @@
-1
-2
-3
-
+total 2904
+drwxr-xr-x  28 keulee  staff      896  8 16 18:26 .
+drwxr-xr-x   9 keulee  staff      288  8 15 18:06 ..
+drwxr-xr-x  15 keulee  staff      480  8 15 23:29 .git
+-rw-r--r--   1 keulee  staff        9  8  8 03:32 .gitignore
+-rw-r--r--   1 keulee  staff      398  8 15 23:28 Makefile
+-rw-r--r--   1 keulee  staff       25  8  8 03:25 README.md
+-rw-r--r--   1 keulee  staff  1319642  8  8 03:25 en.subject.pdf
+-rw-r--r--   1 keulee  staff      208  8 15 23:28 ft_bzero.c
+-rw-r--r--   1 keulee  staff     3044  8 16 18:26 ft_bzero.o
+-rw-r--r--   1 keulee  staff      205  8 15 23:26 ft_calloc.c
+-rw-r--r--   1 keulee  staff     2836  8 16 18:26 ft_calloc.o
+-rw-r--r--   1 keulee  staff      110  8 15 23:22 ft_exit_msg.c
+-rw-r--r--   1 keulee  staff     2440  8 16 18:26 ft_exit_msg.o
+-rw-r--r--   1 keulee  staff       83  8 15 17:48 ft_putchar.c
+-rw-r--r--   1 keulee  staff     3064  8 16 18:26 ft_putchar.o
+-rw-r--r--   1 keulee  staff      143  8 16 17:43 ft_putstr.c
+-rw-r--r--   1 keulee  staff     2704  8 16 18:26 ft_putstr.o
+-rw-r--r--   1 keulee  staff      888  8 15 23:23 ft_split.c
+-rw-r--r--   1 keulee  staff     5832  8 16 18:26 ft_split.o
+-rw-r--r--   1 keulee  staff      359  8 15 23:26 ft_strlcpy.c
+-rw-r--r--   1 keulee  staff     3808  8 16 18:26 ft_strlcpy.o
+drwxr-xr-x   3 keulee  staff       96  8  8 03:29 includes
+-rw-r--r--   1 keulee  staff        7  8 15 23:01 input
+-rw-r--r--   1 keulee  staff     7417  8 15 22:44 note.txt
+-rwxr-xr-x   1 keulee  staff        0  8 16 18:26 output
+-rwxr-xr-x   1 keulee  staff    57200  8 16 18:26 pipex
+-rw-r--r--   1 keulee  staff     1924  8 16 18:26 pipex.c
+-rw-r--r--   1 keulee  staff    14836  8 16 18:26 pipex.o
