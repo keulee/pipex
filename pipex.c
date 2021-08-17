@@ -1,48 +1,36 @@
 #include "./includes/pipex.h"
 
-char	*get_path(char *str, t_info *info, int flag)
+int	get_path(char *str)
 {
 	if (!strncmp(str, "/", 1)) // '/'로 패스가 있을때
-	{
-		if (flag == 1)
-			info->path1 = str;
-		else
-			info->path2 = str;
 		return (1);
-	}
 	return (0);
 	// cmd_tmp = ft_split(str, ' '); // ls -al 등을 위해 커맨드 스플릿
 }
 
-int		complete_path(char *cmd, t_info *info, int flag)
+char	*complete_path(char *cmd)
 {
 	char 	**cmd_tmp;
-	char	*tmp_path[5];
+	char	*path_tmp[5];
 	int		i;		
 
-	// if (get_path(cmd, info, flag) == 0)
-	// {	
-		cmd_tmp = ft_split(cmd, ' ');
-		tmp_path[0] = ft_strjoin("/usr/local/bin/", cmd_tmp[0]);
-		tmp_path[1] = ft_strjoin("/usr/bin/", cmd_tmp[0]);
-		tmp_path[2] = ft_strjoin("/bin/", cmd_tmp[0]);
-		tmp_path[3] = ft_strjoin("/usr/sbin/", cmd_tmp[0]);
-		tmp_path[4] = ft_strjoin("/sbin/", cmd_tmp[0]);
-	}
+	cmd_tmp = ft_split(cmd, ' ');
+	if (get_path(cmd_tmp[0]) == 1)
+		return (cmd_tmp[0]);
+	path_tmp[0] = ft_strjoin("/usr/local/bin/", cmd_tmp[0]);
+	path_tmp[1] = ft_strjoin("/usr/bin/", cmd_tmp[0]);
+	path_tmp[2] = ft_strjoin("/bin/", cmd_tmp[0]);
+	path_tmp[3] = ft_strjoin("/usr/sbin/", cmd_tmp[0]);
+	path_tmp[4] = ft_strjoin("/sbin/", cmd_tmp[0]);
+
 	i = 0;
 	while (i < 5)
 	{
-		if (access(tmp_path[i], F_OK | X_OK) == 0)
-		{
-			if (flag == 1)
-				info->path1 = tmp_path[i];
-			else
-				info->path2 = tmp_path[i];
-			return (1);
-		}
+		if (access(path_tmp[i], F_OK | X_OK) == 0)
+			return (path_tmp[i]);
 		i++;
 	}
-	return (0);
+	return (NULL);
 }
 
 int	main(int ac, char **av, char **env)
@@ -85,21 +73,21 @@ int	main(int ac, char **av, char **env)
 	printf("cmd1 : %s\n", cmd1);
 	printf("cmd2 : %s\n", cmd2);
 
-	char *test = NULL;
-	char *test2 = NULL;
+	// char *test = NULL;
+	// char *test2 = NULL;
 
-	if (complete_path(cmd1, &info, 1) == 1)
-		test = info.path1;
-	if (complete_path(cmd2, &info, 2) == 1)
-		test2 = info.path2;
+	// if (complete_path(cmd1, &info, 1) == 1)
+	// 	test = info.path1;
+	// if (complete_path(cmd2, &info, 2) == 1)
+	// 	test2 = info.path2;
 	// test2 = complete_path(cmd2);
 
 	if (ac != 5)
 		ft_exit_msg("Usage: ./pipex file1 cmd1 cmd2 file2");
 	// int i = 0;
-	// while (i < 5)
-		printf("path : %s\n", test);
-		printf("path : %s\n", test2);
+	// // while (i < 5)
+	// 	printf("path : %s\n", test);
+	// 	printf("path : %s\n", test2);
 	// i = 0;
 	// while (i < 5)
 		// printf("path : %s\n", test2[i++]);
@@ -124,6 +112,9 @@ int	main(int ac, char **av, char **env)
 		close(info.fd_pipe[1]);
 		dup2(info.fd_infile, STDIN_FILENO);
 		info.cmd_arg1 = ft_split(av[2], ' ');
+		info.path1 = complete_path(av[2]);
+		if (!info.path1)
+			perror(info.path1);
 		if (execve(info.path1, info.cmd_arg1, env) == -1)
 		{
 			ft_exit_msg("cmd not found");
@@ -143,7 +134,9 @@ int	main(int ac, char **av, char **env)
 		close(info.fd_pipe[0]);
 		dup2(info.fd_outfile, STDOUT_FILENO);
 		info.cmd_arg2 = ft_split(av[3], ' ');
-		// if (execve("/bin/ls", info.cmd_arg2, env) == -1)
+		info.path2 = complete_path(av[3]);
+		if (!info.path2)
+			ft_exit_msg("no such path");
 		if (execve(info.path2, info.cmd_arg2, env) == -1)
 		{
 			ft_exit_msg("cmd not found");

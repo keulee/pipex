@@ -14,8 +14,10 @@ typedef	struct s_info{
 	int	fd_pipe[2];
 	int pid_status;
 	char **env;
+	char **tmp_path[5];
 	char *path1;
 	char *path2;
+	// char *path2;
 	char **cmd_arg1;
 	char **cmd_arg2;
 }			t_info;
