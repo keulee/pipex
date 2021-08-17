@@ -1,4 +1,8 @@
 #include "./includes/pipex.h"
+/*
+** awk cmd
+** need to deal awk '{count++} END {print count}' 
+*/
 
 int	get_path(char *str)
 {
