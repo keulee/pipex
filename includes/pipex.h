@@ -16,8 +16,8 @@ typedef	struct s_info{
 	char **env;
 	char *path1;
 	char *path2;
-	char **cmd1;
-	char **cmd2;
+	char **cmd_arg1;
+	char **cmd_arg2;
 }			t_info;
 
 void	ft_exit_msg(char *str);
@@ -27,5 +27,7 @@ char	**ft_split(char const *s, char c);
 void	*ft_calloc(size_t count, size_t size);
 size_t	ft_strlcpy(char *restrict dest, const char *restrict src, size_t size);
 void	ft_bzero(void *s, size_t n);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlen(const char *str);
 
 #endif

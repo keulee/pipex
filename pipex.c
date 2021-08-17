@@ -1,11 +1,56 @@
 #include "./includes/pipex.h"
 
+char	*get_path(char *str, t_info *info, int flag)
+{
+	if (!strncmp(str, "/", 1)) // '/'로 패스가 있을때
+	{
+		if (flag == 1)
+			info->path1 = str;
+		else
+			info->path2 = str;
+		return (1);
+	}
+	return (0);
+	// cmd_tmp = ft_split(str, ' '); // ls -al 등을 위해 커맨드 스플릿
+}
+
+int		complete_path(char *cmd, t_info *info, int flag)
+{
+	char 	**cmd_tmp;
+	char	*tmp_path[5];
+	int		i;		
+
+	// if (get_path(cmd, info, flag) == 0)
+	// {	
+		cmd_tmp = ft_split(cmd, ' ');
+		tmp_path[0] = ft_strjoin("/usr/local/bin/", cmd_tmp[0]);
+		tmp_path[1] = ft_strjoin("/usr/bin/", cmd_tmp[0]);
+		tmp_path[2] = ft_strjoin("/bin/", cmd_tmp[0]);
+		tmp_path[3] = ft_strjoin("/usr/sbin/", cmd_tmp[0]);
+		tmp_path[4] = ft_strjoin("/sbin/", cmd_tmp[0]);
+	}
+	i = 0;
+	while (i < 5)
+	{
+		if (access(tmp_path[i], F_OK | X_OK) == 0)
+		{
+			if (flag == 1)
+				info->path1 = tmp_path[i];
+			else
+				info->path2 = tmp_path[i];
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_info	info;
 	int		pid;
-	char	*path1;
-	char	*path2;
+	char	*cmd1;
+	char	*cmd2;
 
 	/* 
 	** command lines
@@ -24,22 +69,40 @@ int	main(int ac, char **av, char **env)
 	** 4. access로 F_OK(존재 유무), X_OK(실행가능 유무)확인 하기
 	** 5. 있으면 path리턴, 없으면 오류 (path not found)리턴
 	*/
+	(void)env;
+	(void)info;
+	(void)pid;
+	// char *str1[2];
+	// str1[0] = "/bin/cat";
+	// str1[1] = NULL;
 
-	char *str1[2];
-	str1[0] = "/bin/cat";
-	str1[1] = NULL;
+	// char *str2[2];
+	// str2[0] = "/bin/ls -al";
+	// str2[1] = NULL;
 
-	char *str2[2];
-	str2[0] = "/bin/ls -al";
-	str2[1] = NULL;
+	cmd1 = av[2]; //raw command1
+	cmd2 = av[3]; //raw command2
+	printf("cmd1 : %s\n", cmd1);
+	printf("cmd2 : %s\n", cmd2);
 
-	path1 = av[2];
-	path2 = av[3];
-	printf("path1 : %s\n", path1);
-	printf("path2 : %s\n", path2);
+	char *test = NULL;
+	char *test2 = NULL;
+
+	if (complete_path(cmd1, &info, 1) == 1)
+		test = info.path1;
+	if (complete_path(cmd2, &info, 2) == 1)
+		test2 = info.path2;
+	// test2 = complete_path(cmd2);
 
 	if (ac != 5)
 		ft_exit_msg("Usage: ./pipex file1 cmd1 cmd2 file2");
+	// int i = 0;
+	// while (i < 5)
+		printf("path : %s\n", test);
+		printf("path : %s\n", test2);
+	// i = 0;
+	// while (i < 5)
+		// printf("path : %s\n", test2[i++]);
 
 	if (pipe(info.fd_pipe) == -1) // if success, fd_pipe[0]는 파이프의 읽기 끝단을 의미하는 파일 디스크립터가 되고, fd_pipe[1]은 파이프의 쓰기 끝단을 의미하는 파일 디스크립터가 된다.
 		ft_exit_msg("pipe failed");
@@ -60,8 +123,8 @@ int	main(int ac, char **av, char **env)
 		dup2(info.fd_pipe[1], STDOUT_FILENO); //0 : STDin, 1 : STDout
 		close(info.fd_pipe[1]);
 		dup2(info.fd_infile, STDIN_FILENO);
-		info.cmd1 = ft_split(av[2], ' ');
-		if (execve("/bin/cat", info.cmd1, env) == -1)
+		info.cmd_arg1 = ft_split(av[2], ' ');
+		if (execve(info.path1, info.cmd_arg1, env) == -1)
 		{
 			ft_exit_msg("cmd not found");
 		}
@@ -79,8 +142,9 @@ int	main(int ac, char **av, char **env)
 		dup2(info.fd_pipe[0], STDIN_FILENO);
 		close(info.fd_pipe[0]);
 		dup2(info.fd_outfile, STDOUT_FILENO);
-		info.cmd2 = ft_split(av[3], ' ');
-		if (execve("/bin/ls", info.cmd2, env) == -1)
+		info.cmd_arg2 = ft_split(av[3], ' ');
+		// if (execve("/bin/ls", info.cmd_arg2, env) == -1)
+		if (execve(info.path2, info.cmd_arg2, env) == -1)
 		{
 			ft_exit_msg("cmd not found");
 		}

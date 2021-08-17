@@ -2,13 +2,13 @@ NAME = pipex
 
 SRCS = pipex.c \
 		ft_putchar.c ft_putstr.c ft_exit_msg.c ft_split.c \
-		ft_strlcpy.c ft_calloc.c ft_bzero.c
+		ft_strlcpy.c ft_calloc.c ft_bzero.c ft_strjoin.c ft_strlen.c
 
 OBJS = $(SRCS:.c=.o)
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 
 RM = rm -f
 
