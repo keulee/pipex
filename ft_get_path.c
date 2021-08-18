@@ -2,7 +2,7 @@
 
 int	get_path(char *str, t_info *info, int flag)
 {
-	if (!strncmp(str, "/", 1)) // '/'로 패스가 있을때
+	if (!ft_strncmp(str, "/", 1)) // '/'로 패스가 있을때
 	{
 		if (flag == 1)
 			info->path1 = str;
