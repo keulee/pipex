@@ -16,8 +16,7 @@ typedef	struct s_info{
 	char *pathline;
 	char **env;
 	char *path;
-	char **cmd_arg1;
-	char **cmd_arg2;
+	char **cmd_arg;
 }			t_info;
 
 void	ft_exit_msg(char *str);
@@ -32,5 +31,6 @@ size_t	ft_strlen(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	extract_pathline(char **env, t_info *info);
 char	*part_path(char **env, t_info *info, char *cmd);
+void	free_tab2(char **str);
 
 #endif

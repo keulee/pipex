@@ -5,11 +5,8 @@ int	main(int ac, char **av, char **env)
 	t_info	info;
 	int		pid;
 
-	printf("cmd1 : %s\n", av[2]);
-	printf("cmd2 : %s\n", av[3]);
-
 	if (ac != 5)
-		ft_exit_msg("Usage: ./pipex file1 cmd1 cmd2 file2");
+		ft_exit_msg("usage: ./pipex file1 cmd1 cmd2 file2");
 
 	if (pipe(info.fd_pipe) == -1) // if success, fd_pipe[0]는 파이프의 읽기 끝단을 의미하는 파일 디스크립터가 되고, fd_pipe[1]은 파이프의 쓰기 끝단을 의미하는 파일 디스크립터가 된다.
 		ft_exit_msg("pipe failed");
@@ -30,11 +27,13 @@ int	main(int ac, char **av, char **env)
 		dup2(info.fd_pipe[1], STDOUT_FILENO); //0 : STDin, 1 : STDout
 		close(info.fd_pipe[1]);
 		dup2(info.fd_infile, STDIN_FILENO);
-		info.cmd_arg1 = ft_split(av[2], ' ');
-		info.path = part_path(env, &info, info.cmd_arg1[0]);
-		if (execve(info.path, info.cmd_arg1, env) == -1)
+		info.cmd_arg = ft_split(av[2], ' ');
+		info.path = part_path(env, &info, info.cmd_arg[0]);
+		if (execve(info.path, info.cmd_arg, env) == -1)
 		{
-			ft_exit_msg("cmd not found");
+			free(info.path);
+			free_tab2(info.cmd_arg);
+			ft_exit_msg("command not found");
 		}
 	}
 	else if (pid > 0)
@@ -47,12 +46,18 @@ int	main(int ac, char **av, char **env)
 		dup2(info.fd_pipe[0], STDIN_FILENO);
 		close(info.fd_pipe[0]);
 		dup2(info.fd_outfile, STDOUT_FILENO);
-		info.cmd_arg2 = ft_split(av[3], ' ');
-		info.path = part_path(env, &info, info.cmd_arg2[0]);
-		if (execve(info.path, info.cmd_arg2, env) == -1)
+		info.cmd_arg = ft_split(av[3], ' ');
+		info.path = part_path(env, &info, info.cmd_arg[0]);
+		if (execve(info.path, info.cmd_arg, env) == -1)
 		{
-			ft_exit_msg("cmd not found");
+			free(info.path);
+			free_tab2(info.cmd_arg);
+			ft_exit_msg("command not found");
 		}
 	}
+	free(info.path);
+	free_tab2(info.cmd_arg);
+	close(info.fd_outfile);
+	close(info.fd_infile);
 	return (EXIT_SUCCESS);
 }

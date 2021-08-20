@@ -2,8 +2,8 @@
 
 void	extract_pathline(char **env, t_info *info)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (env[i])
 	{
@@ -15,10 +15,10 @@ void	extract_pathline(char **env, t_info *info)
 
 char	*part_path(char **env, t_info *info, char *cmd)
 {
-	char **path_split;
-	char *tmp1;
-	char *tmp2;
-	int i;
+	char	**path_split;
+	char	*tmp1;
+	char	*tmp2;
+	int		i;
 
 	i = 0;
 	if (!strncmp(cmd, "/", 1))
@@ -31,9 +31,13 @@ char	*part_path(char **env, t_info *info, char *cmd)
 		tmp2 = ft_strjoin(tmp1, cmd);
 		free(tmp1);
 		if (access(tmp2, F_OK | X_OK) == 0)
+		{
+			free_tab2(path_split);
 			return (tmp2);
+		}
 		free(tmp2);
 		i++;
 	}
+	free_tab2(path_split);
 	return (NULL);
 }
