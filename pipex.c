@@ -1,4 +1,5 @@
 #include "./includes/pipex.h"
+#include <errno.h>
 
 int	main(int ac, char **av, char **env)
 {
@@ -8,7 +9,7 @@ int	main(int ac, char **av, char **env)
 	if (ac != 5)
 	{
 		ft_putstr_fd("usage: ./pipex file1 cmd1 cmd2 file2", 2);
-		exit(0);
+		exit(1);
 	}
 
 	ft_init(&info, env);
@@ -22,7 +23,7 @@ int	main(int ac, char **av, char **env)
 	if (pid == -1)
 	{
 		perror("fork");
-		exit(1);
+		exit(0);
 	}
 	else if (pid == 0)
 	{
@@ -44,13 +45,12 @@ int	main(int ac, char **av, char **env)
 	}
 	else if (pid > 0)
 	{
-		waitpid(pid, &info.pid_status, 0);
-		// printf("wifexited : %d\n", WIFEXITED(info.pid_status));
-		// printf("wifstopped : %d\n", WIFSTOPPED(info.pid_status));
-		// if (WIFEXITED(info.pid_status) == 0)
-		// if (value == -1)
-			// exit(0);
+		waitpid(pid, &info.pid_status, WNOHANG);
+		if (WIFEXITED(info.pid_status) == 0)
+			exit(0);
 		info.fd_outfile = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0777);
+		if (info.fd_outfile < 0)
+			ft_exit_msg("output dosen't exist");
 		close(info.fd_pipe[1]); //pipe[0] -> read / pipe[1] -> write
 		dup2(info.fd_pipe[0], STDIN_FILENO);
 		close(info.fd_pipe[0]);
@@ -65,6 +65,7 @@ int	main(int ac, char **av, char **env)
 			free_tab2(info.cmd_arg);
 			exit(0);
 		}
+		
 	}
 	free(info.path);
 	free_tab2(info.cmd_arg);
