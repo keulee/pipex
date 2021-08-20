@@ -3,7 +3,7 @@ NAME = pipex
 SRCS = pipex.c \
 		ft_putchar.c ft_putstr.c ft_exit_msg.c ft_split.c \
 		ft_strlcpy.c ft_calloc.c ft_bzero.c ft_strjoin.c ft_strlen.c \
-		ft_strncmp.c
+		ft_strncmp.c ft_get_path.c
 
 OBJS = $(SRCS:.c=.o)
 

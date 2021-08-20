@@ -15,10 +15,7 @@ typedef	struct s_info{
 	int pid_status;
 	char *pathline;
 	char **env;
-	// char **tmp_path[5];
 	char *path;
-	// char *path2;
-	// char *path2;
 	char **cmd_arg1;
 	char **cmd_arg2;
 }			t_info;
@@ -33,5 +30,7 @@ void	ft_bzero(void *s, size_t n);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	extract_pathline(char **env, t_info *info);
+char	*part_path(char **env, t_info *info, char *cmd);
 
 #endif
