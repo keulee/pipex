@@ -32,5 +32,9 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	extract_pathline(char **env, t_info *info);
 char	*part_path(char **env, t_info *info, char *cmd);
 void	free_tab2(char **str);
+void	ft_init(t_info *info, char **env);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putchar_fd(char c, int fd);
+void	ft_putendl_fd(char *s, int fd);
 
 #endif

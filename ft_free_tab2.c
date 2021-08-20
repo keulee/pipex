@@ -11,4 +11,5 @@ void	free_tab2(char **str)
 		i++;
 	}
 	free(str);
+	str = NULL;
 }

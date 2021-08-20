@@ -6,23 +6,29 @@ int	main(int ac, char **av, char **env)
 	int		pid;
 
 	if (ac != 5)
-		ft_exit_msg("usage: ./pipex file1 cmd1 cmd2 file2");
+	{
+		ft_putstr_fd("usage: ./pipex file1 cmd1 cmd2 file2", 2);
+		exit(0);
+	}
 
+	ft_init(&info, env);
 	if (pipe(info.fd_pipe) == -1) // if success, fd_pipe[0]는 파이프의 읽기 끝단을 의미하는 파일 디스크립터가 되고, fd_pipe[1]은 파이프의 쓰기 끝단을 의미하는 파일 디스크립터가 된다.
-		ft_exit_msg("pipe failed");
-	
-	info.fd_infile = open(av[1], O_RDONLY);
-	if (info.fd_infile < 0)
-		ft_exit_msg("infile doesn't exist");
-	
-	info.fd_outfile = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0777);
-	
+	{
+		ft_putstr_fd("pipe failed", 2);
+		exit(0);
+	}
+
 	pid = fork();
 	if (pid == -1)
-		ft_exit_msg("fork failed");
+	{
+		perror("fork");
+		exit(1);
+	}
 	else if (pid == 0)
 	{
-		// printf("child\n");
+		info.fd_infile = open(av[1], O_RDONLY);
+		if (info.fd_infile < 0)
+			ft_exit_msg("input doesn't exist");
 		close(info.fd_pipe[0]); //pipe[0] -> read / pipe[1] -> write
 		dup2(info.fd_pipe[1], STDOUT_FILENO); //0 : STDin, 1 : STDout
 		close(info.fd_pipe[1]);
@@ -31,17 +37,20 @@ int	main(int ac, char **av, char **env)
 		info.path = part_path(env, &info, info.cmd_arg[0]);
 		if (execve(info.path, info.cmd_arg, env) == -1)
 		{
-			free(info.path);
-			free_tab2(info.cmd_arg);
-			ft_exit_msg("command not found");
+			ft_putstr_fd("command not found: ", 2);
+			ft_putendl_fd(info.cmd_arg[0], 2);
+			exit(0);
 		}
 	}
 	else if (pid > 0)
 	{
-		int value;
-		value = waitpid(pid, &info.pid_status, 0);
-		if (WIFEXITED(info.pid_status) == 0)
-			exit(1);
+		waitpid(pid, &info.pid_status, 0);
+		// printf("wifexited : %d\n", WIFEXITED(info.pid_status));
+		// printf("wifstopped : %d\n", WIFSTOPPED(info.pid_status));
+		// if (WIFEXITED(info.pid_status) == 0)
+		// if (value == -1)
+			// exit(0);
+		info.fd_outfile = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0777);
 		close(info.fd_pipe[1]); //pipe[0] -> read / pipe[1] -> write
 		dup2(info.fd_pipe[0], STDIN_FILENO);
 		close(info.fd_pipe[0]);
@@ -50,9 +59,11 @@ int	main(int ac, char **av, char **env)
 		info.path = part_path(env, &info, info.cmd_arg[0]);
 		if (execve(info.path, info.cmd_arg, env) == -1)
 		{
+			ft_putstr_fd("command not found: ", 2);
+			ft_putendl_fd(info.cmd_arg[0], 2);
 			free(info.path);
 			free_tab2(info.cmd_arg);
-			ft_exit_msg("command not found");
+			exit(0);
 		}
 	}
 	free(info.path);
