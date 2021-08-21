@@ -8,16 +8,16 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-typedef	struct s_info{
-	int fd_infile;
-	int fd_outfile;
-	int	fd_pipe[2];
-	int pid_status;
-	char *pathline;
-	char **env;
-	char *path;
-	char **cmd_arg;
-}			t_info;
+typedef struct s_info {
+	int		fd_infile;
+	int		fd_outfile;
+	int		fd_pipe[2];
+	int		pid_status;
+	char	*pathline;
+	char	**env;
+	char	*path;
+	char	**cmd_arg;
+}	t_info;
 
 void	ft_exit_msg(char *str);
 void	ft_putchar(const char c);

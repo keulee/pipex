@@ -1,4 +1,4 @@
-#include "./includes/pipex.h"
+#include "includes/pipex.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {

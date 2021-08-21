@@ -22,8 +22,6 @@ void	child_process(t_info *info, char **av, char **env)
 void	parents_process(t_info *info, char **av, char **env, pid_t *pid)
 {
 	waitpid(*pid, &info->pid_status, WNOHANG);
-	// if (WIFEXITED(info->pid_status) == 0)
-	// 	exit(0);
 	info->fd_outfile = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (info->fd_outfile < 0)
 		ft_exit_msg("output doesn't exist");

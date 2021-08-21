@@ -1,4 +1,4 @@
-#include "./includes/pipex.h"
+#include "includes/pipex.h"
 
 void	free_tab2(char **str)
 {
