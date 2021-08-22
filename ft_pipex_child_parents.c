@@ -1,5 +1,21 @@
 #include "includes/pipex.h"
 
+void	pipex_process(t_info *info, char **av, char **env)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+	{
+		ft_putstr_fd("fork failed", 2);
+		exit(0);
+	}
+	else if (pid == 0)
+		child_process(info, av, env);
+	else if (pid > 0)
+		parents_process(info, av, env, &pid);
+}
+
 void	child_process(t_info *info, char **av, char **env)
 {
 	info->fd_infile = open(av[1], O_RDONLY);
@@ -15,7 +31,7 @@ void	child_process(t_info *info, char **av, char **env)
 	{
 		ft_putstr_fd("command not found: ", 2);
 		ft_putendl_fd(info->cmd_arg[0], 2);
-		exit(0);
+		exit(1);
 	}
 }
 
@@ -35,8 +51,7 @@ void	parents_process(t_info *info, char **av, char **env, pid_t *pid)
 	{
 		ft_putstr_fd("command not found: ", 2);
 		ft_putendl_fd(info->cmd_arg[0], 2);
-		free(info->path);
-		free_tab2(info->cmd_arg);
-		exit(0);
+		ft_free(info);
+		exit(1);
 	}
 }

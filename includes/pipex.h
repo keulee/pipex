@@ -38,5 +38,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	child_process(t_info *info, char **av, char **env);
 void	parents_process(t_info *info, char **av, char **env, pid_t *pid);
+void	pipex_process(t_info *info, char **av, char **env);
+void	ft_free(t_info *info);
 
 #endif

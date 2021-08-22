@@ -1,50 +1,44 @@
-total 3064
-drwxr-xr-x  49 keulee  staff     1568  8 21 18:55 .
-drwxr-xr-x   9 keulee  staff      288  8 15 18:06 ..
-drwxr-xr-x  15 keulee  staff      480  8 21 18:44 .git
--rw-r--r--   1 keulee  staff       38  8 20 20:41 .gitignore
-drwxr-xr-x   3 keulee  staff       96  8 18 21:10 .vscode
--rw-r--r--   1 keulee  staff      541  8 21 18:55 Makefile
--rw-r--r--   1 keulee  staff       25  8  8 03:25 README.md
--rw-r--r--   1 keulee  staff  1319642  8  8 03:25 en.subject.pdf
--rw-r--r--   1 keulee  staff      208  8 15 23:28 ft_bzero.c
--rw-r--r--   1 keulee  staff     3044  8 21 18:55 ft_bzero.o
--rw-r--r--   1 keulee  staff      205  8 15 23:26 ft_calloc.c
--rw-r--r--   1 keulee  staff     2836  8 21 18:55 ft_calloc.o
--rw-r--r--   1 keulee  staff     1391  8 21 18:55 ft_child_parents.c
--rw-r--r--   1 keulee  staff    10848  8 21 18:55 ft_child_parents.o
--rw-r--r--   1 keulee  staff      107  8 21 18:09 ft_exit_msg.c
--rw-r--r--   1 keulee  staff     2440  8 21 18:55 ft_exit_msg.o
--rw-r--r--   1 keulee  staff      149  8 20 18:52 ft_free_tab2.c
--rw-r--r--   1 keulee  staff     2672  8 21 18:55 ft_free_tab2.o
--rw-r--r--   1 keulee  staff      708  8 20 17:50 ft_get_path.c
--rw-r--r--   1 keulee  staff     6288  8 21 18:55 ft_get_path.o
--rw-r--r--   1 keulee  staff       83  8 15 17:48 ft_putchar.c
--rw-r--r--   1 keulee  staff     3064  8 21 18:55 ft_putchar.o
--rw-r--r--   1 keulee  staff       87  8 20 19:12 ft_putchar_fd.c
--rw-r--r--   1 keulee  staff     3132  8 21 18:55 ft_putchar_fd.o
--rw-r--r--   1 keulee  staff      117  8 20 19:12 ft_putendl_fd.c
--rw-r--r--   1 keulee  staff     2448  8 21 18:55 ft_putendl_fd.o
--rw-r--r--   1 keulee  staff      143  8 16 17:43 ft_putstr.c
--rw-r--r--   1 keulee  staff     2704  8 21 18:55 ft_putstr.o
--rw-r--r--   1 keulee  staff      149  8 20 19:11 ft_putstr_fd.c
--rw-r--r--   1 keulee  staff     2748  8 21 18:55 ft_putstr_fd.o
--rw-r--r--   1 keulee  staff      888  8 15 23:23 ft_split.c
--rw-r--r--   1 keulee  staff     5832  8 21 18:55 ft_split.o
--rw-r--r--   1 keulee  staff      496  8 16 20:17 ft_strjoin.c
--rw-r--r--   1 keulee  staff     3932  8 21 18:55 ft_strjoin.o
--rw-r--r--   1 keulee  staff      359  8 15 23:26 ft_strlcpy.c
--rw-r--r--   1 keulee  staff     3808  8 21 18:55 ft_strlcpy.o
--rw-r--r--   1 keulee  staff      129  8 17 22:56 ft_strlen.c
--rw-r--r--   1 keulee  staff     2900  8 21 18:55 ft_strlen.o
--rw-r--r--   1 keulee  staff      384  8 16 18:44 ft_strncmp.c
--rw-r--r--   1 keulee  staff     3992  8 21 18:55 ft_strncmp.o
-drwxr-xr-x   3 keulee  staff       96  8  8 03:29 includes
--rw-r--r--   1 keulee  staff        7  8 15 23:01 input
--rw-r--r--   1 keulee  staff     7417  8 15 22:44 note.txt
--rwxr-xr-x   1 keulee  staff        0  8 21 18:55 output
--rwxr-xr-x   1 keulee  staff    59352  8 21 18:55 pipex
-drwxr-xr-x  14 keulee  staff      448  8 20 20:05 pipex-tester
--rw-r--r--   1 keulee  staff     2097  8 21 18:55 pipex.c
-drwxr-xr-x   3 keulee  staff       96  8 20 17:46 pipex.dSYM
--rw-r--r--   1 keulee  staff     7696  8 21 18:55 pipex.o
+Makefile
+README.md
+en.subject.pdf
+ft_bzero.c
+ft_bzero.o
+ft_calloc.c
+ft_calloc.o
+ft_exit_msg.c
+ft_exit_msg.o
+ft_free_tab2.c
+ft_free_tab2.o
+ft_get_path.c
+ft_get_path.o
+ft_pipex_child_parents.c
+ft_pipex_child_parents.o
+ft_putchar.c
+ft_putchar.o
+ft_putchar_fd.c
+ft_putchar_fd.o
+ft_putendl_fd.c
+ft_putendl_fd.o
+ft_putstr.c
+ft_putstr.o
+ft_putstr_fd.c
+ft_putstr_fd.o
+ft_split.c
+ft_split.o
+ft_strjoin.c
+ft_strjoin.o
+ft_strlcpy.c
+ft_strlcpy.o
+ft_strlen.c
+ft_strlen.o
+ft_strncmp.c
+ft_strncmp.o
+includes
+input
+note.txt
+output
+pipex
+pipex-tester
+pipex.c
+pipex.dSYM
+pipex.o
