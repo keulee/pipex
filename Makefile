@@ -20,11 +20,18 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
+bonus: re
+	$(MAKE) fclean -C pipex_bonus
+	$(MAKE) -C pipex_bonus
+	cp ./pipex_bonus/pipexb ./pipexb
+
 clean:
+	$(MAKE) -C pipex_bonus clean
 	$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME) $(LIBFT)
+	$(MAKE) -C pipex_bonus fclean
+	$(RM) $(NAME) $(LIBFT) pipexb
 
 re: fclean all
 

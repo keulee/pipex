@@ -3,3 +3,4 @@ pipex
 *.dSYM
 .vscode
 pipex-tester/
+pipexb

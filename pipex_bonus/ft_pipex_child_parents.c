@@ -1,4 +1,4 @@
-#include "includes/pipex.h"
+#include "includes/pipex_bonus.h"
 
 void	pipex_process(t_info *info, char **av, char **env)
 {
@@ -20,10 +20,7 @@ void	child_process(t_info *info, char **av, char **env)
 {
 	info->fd_infile = open(av[1], O_RDONLY);
 	if (info->fd_infile < 0)
-	{
-		ft_putstr_fd("input file doesn't exist", 2);
-		exit(1);
-	}
+		ft_exit_msg("input doesn't exist");
 	close(info->fd_pipe[0]); //pipe[0] -> read / pipe[1] -> write
 	dup2(info->fd_pipe[1], STDOUT_FILENO); //0 : STDin, 1 : STDout
 	close(info->fd_pipe[1]);
@@ -43,10 +40,7 @@ void	parents_process(t_info *info, char **av, char **env, pid_t *pid)
 	waitpid(*pid, &info->pid_status, WNOHANG);
 	info->fd_outfile = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0777);
 	if (info->fd_outfile < 0)
-	{
-		ft_putstr_fd("output file doesn't exist", 2);
-		exit(1);
-	}
+		ft_exit_msg("output doesn't exist");
 	close(info->fd_pipe[1]); //pipe[0] -> read / pipe[1] -> write
 	dup2(info->fd_pipe[0], STDIN_FILENO);
 	close(info->fd_pipe[0]);
