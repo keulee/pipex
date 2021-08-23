@@ -1,4 +1,4 @@
-#include "includes/pipex.h"
+#include "../includes/pipex.h"
 
 void	pipex_process(t_info *info, char **av, char **env)
 {

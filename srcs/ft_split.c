@@ -1,4 +1,4 @@
-#include "includes/pipex.h"
+#include "../includes/pipex.h"
 
 size_t	ft_strnum(char *s, char c)
 {
