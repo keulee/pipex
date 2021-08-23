@@ -8,19 +8,29 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+typedef struct s_node {
+	char			*cmd;
+	struct s_node	*next;
+}	t_node;
+
 typedef struct s_info {
+	t_node	*node;
+	int		nodesize;
 	int		count_pipe;
 	int		count_cmd;
 	int		fd_infile;
 	int		fd_outfile;
 	int		fd_pipe[2];
+	int		fd_other_pipe[2];
 	int		pid_status;
+	int		pid_status2;
 	char	*pathline;
 	char	**env;
 	char	*path;
 	char	**cmd_arg;
 }	t_info;
 
+void	insert_node(t_node **node, char *cmd);
 void	ft_exit_msg(char *str);
 void	ft_putchar(const char c);
 void	ft_putstr(const char *str);
