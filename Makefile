@@ -22,20 +22,20 @@ RM = rm -f
 all: $(NAME)
 
 bonus: re
-	$(MAKE) fclean -C pipex_bonus
-	$(MAKE) -C pipex_bonus
-	cp ./pipex_bonus/pipexb ./pipexb
+	@$(MAKE) fclean -C pipex_bonus
+	@$(MAKE) -C pipex_bonus
+	@cp ./pipex_bonus/pipexb ./pipexb
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
-	$(MAKE) -C pipex_bonus clean
-	$(RM) $(OBJS)
+	@$(MAKE) -C pipex_bonus clean
+	@$(RM) $(OBJS)
 
 fclean: clean
-	$(MAKE) -C pipex_bonus fclean
-	$(RM) $(NAME) pipexb
+	@$(MAKE) -C pipex_bonus fclean
+	@$(RM) $(NAME) pipexb
 
 re: fclean all
 

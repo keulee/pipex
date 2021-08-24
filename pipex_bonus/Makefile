@@ -17,12 +17,12 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
 
 fclean: clean
-	$(RM) $(NAME) $(LIBFT)
+	@$(RM) $(NAME) $(LIBFT)
 
 .PHONY: fclean all
