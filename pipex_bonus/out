@@ -1,24 +1,11 @@
-       4       4      21
-       3       3      15
-Makefile
-ft_bzero.c
-ft_calloc.c
-ft_exit_msg.c
-ft_free.c
-ft_get_path.c
-ft_pipex_child_parents.c
-ft_putchar.c
-ft_putchar_fd.c
-ft_putendl_fd.c
-ft_putstr.c
-ft_putstr_fd.c
-ft_split.c
-ft_strjoin.c
-ft_strlcpy.c
-ft_strlen.c
-ft_strncmp.c
-in
-includes
-out
-pipex_bonus.c
-srcs_ob
+hello
+this
+is
+infile
+and
+i'm
+tying
+to
+do
+a
+bonus
