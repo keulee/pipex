@@ -8,6 +8,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+# define BUFFER_SIZE 1
+
 typedef struct s_node {
 	char			*cmd;
 	struct s_node	*next;
@@ -52,5 +54,12 @@ void	child_process(t_info *info, char **av, char **env);
 void	parents_process(t_info *info, char **av, char **env, pid_t *pid);
 void	pipex_process(t_info *info, char **av, char **env);
 void	ft_free(t_info *info);
+
+
+void	ft_heredoc(char *limiter);
+int		get_next_line(int fd, char **line);
+char	*ft_strdup(const char *src);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+int		ft_strchr(const char *s, int c);
 
 #endif

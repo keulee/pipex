@@ -5,7 +5,7 @@ int	main(int ac, char **av, char **env)
 	t_info	info;
 	int		pid;
 
-	(void)env;
+	(void) env;
 	(void)av;
 	if (ac < 4)
 	{
@@ -24,7 +24,10 @@ int	main(int ac, char **av, char **env)
 	else if (pid == 0)
 	{
 		if (ft_strncmp(av[1], "here_doc", 8) == 0)
+		{
 			printf("heredoc exist\n");
+			ft_heredoc(av[2]);
+		}
 		else
 			child_process(&info, av, env);
 	}
@@ -36,7 +39,10 @@ int	main(int ac, char **av, char **env)
 			printf("heredoc config needed\n");
 		}
 		else
+		{
+			printf("enter here also?\n");
 			parents_process(&info, av, env, &pid);
+		}
 	}
 	// pipex_process(&info, av, env);
 	// ft_free(&info);
