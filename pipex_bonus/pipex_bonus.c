@@ -3,10 +3,8 @@
 int	main(int ac, char **av, char **env)
 {
 	t_info	info;
-	int		pid;
+	pid_t	pid;
 
-	(void) env;
-	(void)av;
 	if (ac < 4)
 	{
 		ft_putstr_fd("usage: ./pipex here_doc LIMITER cmd cmd1 file\n", 2);
@@ -24,29 +22,20 @@ int	main(int ac, char **av, char **env)
 	else if (pid == 0)
 	{
 		if (ft_strncmp(av[1], "here_doc", 8) == 0)
-		{
-			printf("heredoc exist\n");
-			ft_heredoc(av[2]);
-		}
+			ft_heredoc(av, env, &info);
 		else
 			child_process(&info, av, env);
 	}
 	else if (pid > 0)
 	{
 		if (ft_strncmp(av[1], "here_doc", 8) == 0)
-		{
-			wait(0);
-			printf("heredoc config needed\n");
-		}
+			ft_heredoc_parents(&info, av, env, &pid);
 		else
-		{
-			printf("enter here also?\n");
 			parents_process(&info, av, env, &pid);
-		}
 	}
 	// pipex_process(&info, av, env);
-	// ft_free(&info);
-	// close(info.fd_outfile);
-	// close(info.fd_infile);
+	ft_free(&info);
+	close(info.fd_outfile);
+	close(info.fd_infile);
 	return (EXIT_SUCCESS);
 }

@@ -10,29 +10,17 @@
 
 # define BUFFER_SIZE 1
 
-typedef struct s_node {
-	char			*cmd;
-	struct s_node	*next;
-}	t_node;
-
 typedef struct s_info {
-	t_node	*node;
-	int		nodesize;
-	int		count_pipe;
-	int		count_cmd;
 	int		fd_infile;
 	int		fd_outfile;
 	int		fd_pipe[2];
-	int		fd_other_pipe[2];
 	int		pid_status;
-	int		pid_status2;
 	char	*pathline;
 	char	**env;
 	char	*path;
 	char	**cmd_arg;
 }	t_info;
 
-void	insert_node(t_node **node, char *cmd);
 void	ft_exit_msg(char *str);
 void	ft_putchar(const char c);
 void	ft_putstr(const char *str);
@@ -56,10 +44,11 @@ void	pipex_process(t_info *info, char **av, char **env);
 void	ft_free(t_info *info);
 
 
-void	ft_heredoc(char *limiter);
+void	ft_heredoc(char **av, char **env, t_info *info);
 int		get_next_line(int fd, char **line);
 char	*ft_strdup(const char *src);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_strchr(const char *s, int c);
+void	ft_heredoc_parents(t_info *info, char **av, char **env, pid_t *pid);
 
 #endif
