@@ -1,4 +1,4 @@
-#include "includes/pipex_bonus.h"
+#include "../includes/pipex_bonus.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

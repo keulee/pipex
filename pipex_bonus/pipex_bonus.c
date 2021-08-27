@@ -33,7 +33,6 @@ int	main(int ac, char **av, char **env)
 		else
 			parents_process(&info, av, env, &pid);
 	}
-	// pipex_process(&info, av, env);
 	ft_free(&info);
 	close(info.fd_outfile);
 	close(info.fd_infile);

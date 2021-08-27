@@ -1,4 +1,4 @@
-#include "includes/pipex_bonus.h"
+#include "../includes/pipex_bonus.h"
 
 int	ft_strchr(const char *s, int c)
 {

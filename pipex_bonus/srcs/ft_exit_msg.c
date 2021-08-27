@@ -1,4 +1,4 @@
-#include "includes/pipex_bonus.h"
+#include "../includes/pipex_bonus.h"
 
 void	ft_exit_msg(char *str)
 {

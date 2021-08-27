@@ -1,10 +1,10 @@
 NAME = pipexb
 
 SRCS = pipex_bonus.c \
-		ft_putstr_fd.c ft_putchar_fd.c ft_putendl_fd.c ft_split.c ft_get_path.c \
-		ft_free.c ft_calloc.c ft_strjoin.c ft_strlcpy.c ft_strncmp.c ft_bzero.c ft_strlen.c \
-		ft_exit_msg.c ft_putchar.c ft_putstr.c ft_pipex_child_parents.c \
-		ft_heredoc.c get_next_line.c ft_substr.c ft_strchr.c ft_strdup.c
+		srcs/ft_putstr_fd.c srcs/ft_putchar_fd.c srcs/ft_putendl_fd.c srcs/ft_split.c srcs/ft_get_path.c \
+		srcs/ft_free.c srcs/ft_calloc.c srcs/ft_strjoin.c srcs/ft_strlcpy.c srcs/ft_strncmp.c srcs/ft_bzero.c srcs/ft_strlen.c \
+		srcs/ft_exit_msg.c srcs/ft_putchar.c srcs/ft_putstr.c srcs/ft_pipex_child_parents.c \
+		srcs/ft_heredoc.c srcs/get_next_line.c srcs/ft_substr.c srcs/ft_strchr.c srcs/ft_strdup.c
 	
 
 OBJS = $(SRCS:.c=.o)
