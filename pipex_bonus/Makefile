@@ -1,11 +1,11 @@
 NAME = pipex
 
 SRCS = pipex_bonus.c \
-		srcs/ft_putstr_fd.c srcs/ft_putchar_fd.c srcs/ft_putendl_fd.c srcs/ft_split.c srcs/ft_get_path.c \
-		srcs/ft_free.c srcs/ft_calloc.c srcs/ft_strjoin.c srcs/ft_strlcpy.c srcs/ft_strncmp.c srcs/ft_bzero.c srcs/ft_strlen.c \
-		srcs/ft_exit_msg.c srcs/ft_putchar.c srcs/ft_putstr.c srcs/ft_pipex_child_parents.c \
-		srcs/ft_heredoc.c srcs/get_next_line.c srcs/ft_substr.c srcs/ft_strchr.c srcs/ft_strdup.c \
-		srcs/ft_strcmp.c
+		srcs/ft_putstr_fd_bonus.c srcs/ft_putchar_fd_bonus.c srcs/ft_putendl_fd_bonus.c srcs/ft_split_bonus.c srcs/ft_get_path_bonus.c \
+		srcs/ft_free_bonus.c srcs/ft_calloc_bonus.c srcs/ft_strjoin_bonus.c srcs/ft_strlcpy_bonus.c srcs/ft_strncmp_bonus.c srcs/ft_bzero_bonus.c srcs/ft_strlen_bonus.c \
+		srcs/ft_exit_msg_bonus.c srcs/ft_putchar_bonus.c srcs/ft_putstr_bonus.c srcs/ft_pipex_child_parents_bonus.c \
+		srcs/ft_heredoc_bonus.c srcs/get_next_line_bonus.c srcs/ft_substr_bonus.c srcs/ft_strchr_bonus.c srcs/ft_strdup_bonus.c \
+		srcs/ft_strcmp_bonus.c
 	
 
 OBJS = $(SRCS:.c=.o)
