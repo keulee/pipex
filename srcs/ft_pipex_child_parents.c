@@ -41,7 +41,7 @@ void	child_process(t_info *info, char **av, char **env)
 void	parents_process(t_info *info, char **av, char **env, pid_t *pid)
 {
 	waitpid(*pid, &info->pid_status, WNOHANG);
-	info->fd_outfile = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0777);
+	info->fd_outfile = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (info->fd_outfile < 0)
 	{
 		ft_putstr_fd("output file doesn't exist", 2);

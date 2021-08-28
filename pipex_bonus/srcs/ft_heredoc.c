@@ -69,7 +69,7 @@ void	heredoc_precess(int pipe_heredoc[2], char **av)
 void	ft_heredoc_parents(t_info *info, char **av, char **env, pid_t *pid)
 {
 	waitpid(*pid, &info->pid_status, WNOHANG);
-	info->fd_outfile = open(av[5], O_RDWR | O_CREAT | O_APPEND, 0777);
+	info->fd_outfile = open(av[5], O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (info->fd_outfile < 0)
 	{
 		ft_putstr_fd("output file doesn't exist", 2);
