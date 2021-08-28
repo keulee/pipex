@@ -3,9 +3,8 @@
 int	main(int ac, char **av, char **env)
 {
 	t_info	info;
-	pid_t	pid;
 
-	if (ac < 4)
+	if (ac < 4 || ac > 6)
 	{
 		ft_putstr_fd("usage: ./pipex here_doc LIMITER cmd cmd1 file\n", 2);
 		ft_putstr_fd("usage: ./pipex file1 cmd1 cmd2 file2", 2);
@@ -16,25 +15,9 @@ int	main(int ac, char **av, char **env)
 		ft_putstr_fd("pipe failed", 2);
 		exit(1);
 	}
-	pid = fork();
-	if (pid < 0)
-		ft_putstr_fd("fork failed", 2);
-	else if (pid == 0)
-	{
-		if (ft_strncmp(av[1], "here_doc", 8) == 0)
-			ft_heredoc(av, env, &info);
-		else
-			child_process(&info, av, env);
-	}
-	else if (pid > 0)
-	{
-		if (ft_strncmp(av[1], "here_doc", 8) == 0)
-			ft_heredoc_parents(&info, av, env, &pid);
-		else
-			parents_process(&info, av, env, &pid);
-	}
+	pipex_with_heredoc(&info, av, env);
 	ft_free(&info);
-	close(info.fd_outfile);
 	close(info.fd_infile);
+	close(info.fd_outfile);
 	return (EXIT_SUCCESS);
 }

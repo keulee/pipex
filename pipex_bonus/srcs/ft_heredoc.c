@@ -1,28 +1,33 @@
 #include "../includes/pipex_bonus.h"
 
+void	pipex_with_heredoc(t_info *info, char **av, char **env)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid < 0)
+		ft_putstr_fd("fork failed", 2);
+	else if (pid == 0)
+	{
+		if (ft_strncmp(av[1], "here_doc", 8) == 0)
+			ft_heredoc(av, env, info);
+		else
+			child_process(info, av, env);
+	}
+	else if (pid > 0)
+	{
+		if (ft_strncmp(av[1], "here_doc", 8) == 0)
+			ft_heredoc_parents(info, av, env, &pid);
+		else
+			parents_process(info, av, env, &pid);
+	}
+}
+
 void	ft_heredoc(char **av, char **env, t_info *info)
 {
 	int		pipe_heredoc[2];
-	char	*line;
 
-	if (pipe(pipe_heredoc) == -1)
-	{
-		ft_putstr_fd("pipe failed", 2);
-		exit(1);
-	}
-	write(1, "pipe heredoc> ", 14);
-	while (get_next_line(0, &line) > 0)
-	{
-		if (ft_strncmp(line, av[2], ft_strlen(line)) == 0)
-		{
-			free(line);
-			break ;
-		}
-		write(STDOUT_FILENO, "pipe heredoc> ", 14);
-		write(pipe_heredoc[1], line, ft_strlen(line));
-		write(pipe_heredoc[1], "\n", 1);
-		free(line);
-	}
+	heredoc_precess(pipe_heredoc, av);
 	dup2(pipe_heredoc[0], STDIN_FILENO);
 	close(pipe_heredoc[1]);
 	dup2(info->fd_pipe[1], STDOUT_FILENO);
@@ -37,6 +42,30 @@ void	ft_heredoc(char **av, char **env, t_info *info)
 	}
 }
 
+void	heredoc_precess(int pipe_heredoc[2], char **av)
+{
+	char *line;
+
+	if (pipe(pipe_heredoc) == -1)
+	{
+		ft_putstr_fd("pipe failed", 2);
+		exit(1);
+	}
+	write(STDOUT_FILENO, "pipe heredoc> ", 14);
+	while (get_next_line(0, &line) != 0)
+	{
+		if (ft_strcmp(line, av[2]) == 0)
+		{
+			free(line);
+			break ;
+		}
+		write(STDOUT_FILENO, "pipe heredoc> ", 14);
+		write(pipe_heredoc[1], line, ft_strlen(line));
+		write(pipe_heredoc[1], "\n", 1);
+		free(line);
+	}
+}
+
 void	ft_heredoc_parents(t_info *info, char **av, char **env, pid_t *pid)
 {
 	waitpid(*pid, &info->pid_status, WNOHANG);
@@ -46,7 +75,7 @@ void	ft_heredoc_parents(t_info *info, char **av, char **env, pid_t *pid)
 		ft_putstr_fd("output file doesn't exist", 2);
 		exit(1);
 	}
-	close(info->fd_pipe[1]); //pipe[0] -> read / pipe[1] -> write
+	close(info->fd_pipe[1]);
 	dup2(info->fd_pipe[0], STDIN_FILENO);
 	close(info->fd_pipe[0]);
 	dup2(info->fd_outfile, STDOUT_FILENO);

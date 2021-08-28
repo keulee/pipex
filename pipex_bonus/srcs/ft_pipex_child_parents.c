@@ -1,21 +1,5 @@
 #include "../includes/pipex_bonus.h"
 
-void	pipex_process(t_info *info, char **av, char **env)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid == -1)
-	{
-		ft_putstr_fd("fork failed", 2);
-		exit(0);
-	}
-	else if (pid == 0)
-		child_process(info, av, env);
-	else if (pid > 0)
-		parents_process(info, av, env, &pid);
-}
-
 void	child_process(t_info *info, char **av, char **env)
 {
 	info->fd_infile = open(av[1], O_RDONLY);
