@@ -8,8 +8,8 @@ void	child_process(t_info *info, char **av, char **env)
 		ft_putstr_fd("input file doesn't exist", 2);
 		exit(1);
 	}
-	close(info->fd_pipe[0]); //pipe[0] -> read / pipe[1] -> write
-	dup2(info->fd_pipe[1], STDOUT_FILENO); //0 : STDin, 1 : STDout
+	close(info->fd_pipe[0]);
+	dup2(info->fd_pipe[1], STDOUT_FILENO);
 	close(info->fd_pipe[1]);
 	dup2(info->fd_infile, STDIN_FILENO);
 	info->cmd_arg = ft_split(av[2], ' ');
@@ -31,7 +31,7 @@ void	parents_process(t_info *info, char **av, char **env, pid_t *pid)
 		ft_putstr_fd("output file doesn't exist", 2);
 		exit(1);
 	}
-	close(info->fd_pipe[1]); //pipe[0] -> read / pipe[1] -> write
+	close(info->fd_pipe[1]);
 	dup2(info->fd_pipe[0], STDIN_FILENO);
 	close(info->fd_pipe[0]);
 	dup2(info->fd_outfile, STDOUT_FILENO);

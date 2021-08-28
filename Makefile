@@ -24,7 +24,7 @@ all: $(NAME)
 bonus: re
 	@$(MAKE) fclean -C pipex_bonus
 	@$(MAKE) -C pipex_bonus
-	@cp ./pipex_bonus/pipexb ./pipexb
+	@cp ./pipex_bonus/pipex ./pipex
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
@@ -35,7 +35,7 @@ clean:
 
 fclean: clean
 	@$(MAKE) -C pipex_bonus fclean
-	@$(RM) $(NAME) pipexb
+	@$(RM) $(NAME)
 
 re: fclean all
 

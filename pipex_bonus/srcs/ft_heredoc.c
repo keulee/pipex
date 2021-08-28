@@ -44,7 +44,7 @@ void	ft_heredoc(char **av, char **env, t_info *info)
 
 void	heredoc_precess(int pipe_heredoc[2], char **av)
 {
-	char *line;
+	char	*line;
 
 	if (pipe(pipe_heredoc) == -1)
 	{
