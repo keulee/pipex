@@ -1,5 +1,17 @@
 #include "includes/pipex_bonus.h"
 
+void	heredoc_cmd_check(int ac, char **av)
+{
+	if (ac == 6)
+	{
+		if (ft_strcmp(av[1], "here_doc") != 0)
+		{
+			ft_putstr_fd("commend here_doc not correcated", 2);
+			exit(1);
+		}
+	}
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_info	info;
@@ -10,6 +22,7 @@ int	main(int ac, char **av, char **env)
 		ft_putstr_fd("usage: ./pipex file1 cmd1 cmd2 file2", 2);
 		exit(1);
 	}
+	heredoc_cmd_check(ac, av);
 	if (pipe(info.fd_pipe) == -1)
 	{
 		ft_putstr_fd("pipe failed", 2);

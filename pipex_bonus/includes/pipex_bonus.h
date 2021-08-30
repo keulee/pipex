@@ -42,7 +42,6 @@ void	child_process(t_info *info, char **av, char **env);
 void	parents_process(t_info *info, char **av, char **env, pid_t *pid);
 void	pipex_process(t_info *info, char **av, char **env);
 void	ft_free(t_info *info);
-
 void	pipex_with_heredoc(t_info *info, char **av, char **env);
 void	ft_heredoc(char **av, char **env, t_info *info);
 int		get_next_line(int fd, char **line);
@@ -52,5 +51,6 @@ int		ft_strchr(const char *s, int c);
 void	ft_heredoc_parents(t_info *info, char **av, char **env, pid_t *pid);
 void	heredoc_precess(int pipe_heredoc[2], char **av);
 int		ft_strcmp(char *s1, char *s2);
+void	heredoc_cmd_check(int ac, char **av);
 
 #endif
