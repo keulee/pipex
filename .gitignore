@@ -3,4 +3,5 @@ pipex
 *.dSYM
 .vscode
 pipex-tester/
-pipexb
+out
+output
