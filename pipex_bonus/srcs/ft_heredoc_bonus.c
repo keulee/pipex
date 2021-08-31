@@ -6,7 +6,7 @@ void	pipex_with_heredoc(t_info *info, char **av, char **env)
 
 	pid = fork();
 	if (pid < 0)
-		ft_putstr_fd("fork failed", 2);
+		ft_putstr_fd("fork failed\n", 2);
 	else if (pid == 0)
 	{
 		if (ft_strncmp(av[1], "here_doc", 8) == 0)
@@ -48,7 +48,7 @@ void	heredoc_precess(int pipe_heredoc[2], char **av)
 
 	if (pipe(pipe_heredoc) == -1)
 	{
-		ft_putstr_fd("pipe failed", 2);
+		ft_putstr_fd("pipe failed\n", 2);
 		exit(1);
 	}
 	write(STDOUT_FILENO, "pipe heredoc> ", 14);
@@ -72,7 +72,7 @@ void	ft_heredoc_parents(t_info *info, char **av, char **env, pid_t *pid)
 	info->fd_outfile = open(av[5], O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (info->fd_outfile < 0)
 	{
-		ft_putstr_fd("output file doesn't exist", 2);
+		ft_putstr_fd("output file doesn't exist\n", 2);
 		exit(1);
 	}
 	close(info->fd_pipe[1]);
