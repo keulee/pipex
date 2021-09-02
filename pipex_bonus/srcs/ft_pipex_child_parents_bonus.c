@@ -17,7 +17,7 @@ void	child_process(t_info *info, char **av, char **env)
 	info->fd_infile = open(av[1], O_RDONLY);
 	if (info->fd_infile < 0)
 	{
-		ft_putstr_fd("file1(input) doesn't exist\n", 2);
+		ft_putendl_fd("file1(input) doesn't exist", 2);
 		exit(1);
 	}
 	close(info->fd_pipe[0]);
@@ -40,7 +40,7 @@ void	parents_process(t_info *info, char **av, char **env, pid_t *pid)
 	info->fd_outfile = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (info->fd_outfile < 0)
 	{
-		ft_putstr_fd("file2(output) doesn't exist\n", 2);
+		ft_putendl_fd("file2(output) doesn't exist", 2);
 		exit(1);
 	}
 	close(info->fd_pipe[1]);
