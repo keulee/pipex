@@ -12,7 +12,7 @@
 
 #include "../includes/pipex_bonus.h"
 
-void	heredoc_cmd_check(int ac, char **av)
+void	heredoc_cmd_check(int ac, char **av, t_info *info)
 {
 	if (ac == 6)
 	{
@@ -21,6 +21,8 @@ void	heredoc_cmd_check(int ac, char **av)
 			ft_putendl_fd("command here_doc not corrected", 2);
 			exit(1);
 		}
+		else
+			info->h_flag = 1;
 	}
 }
 
@@ -34,7 +36,8 @@ int	main(int ac, char **av, char **env)
 		ft_putendl_fd("usage2: ./pipex file1 cmd1 cmd2 file2", 2);
 		exit(1);
 	}
-	heredoc_cmd_check(ac, av);
+	info.h_flag = 0;
+	heredoc_cmd_check(ac, av, &info);
 	if (pipe(info.fd_pipe) == -1)
 	{
 		ft_putendl_fd("pipe failed", 2);

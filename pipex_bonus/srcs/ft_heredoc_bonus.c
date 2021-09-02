@@ -21,14 +21,14 @@ void	pipex_with_heredoc(t_info *info, char **av, char **env)
 		ft_putendl_fd("fork failed", 2);
 	else if (pid == 0)
 	{
-		if (ft_strncmp(av[1], "here_doc", 8) == 0)
+		if (ft_strcmp(av[1], "here_doc") == 0 && info->h_flag == 1)
 			ft_heredoc(av, env, info);
 		else
 			child_process(info, av, env);
 	}
 	else if (pid > 0)
 	{
-		if (ft_strncmp(av[1], "here_doc", 8) == 0)
+		if (ft_strcmp(av[1], "here_doc") == 0 && info->h_flag == 1)
 			ft_heredoc_parents(info, av, env, &pid);
 		else
 			parents_process(info, av, env, &pid);

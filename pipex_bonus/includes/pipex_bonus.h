@@ -31,6 +31,7 @@ typedef struct s_info {
 	char	**env;
 	char	*path;
 	char	**cmd_arg;
+	int		h_flag;
 }	t_info;
 
 void	ft_exit_msg(char *str);
@@ -63,6 +64,6 @@ int		ft_strchr(const char *s, int c);
 void	ft_heredoc_parents(t_info *info, char **av, char **env, pid_t *pid);
 void	heredoc_precess(int pipe_heredoc[2], char **av);
 int		ft_strcmp(char *s1, char *s2);
-void	heredoc_cmd_check(int ac, char **av);
+void	heredoc_cmd_check(int ac, char **av, t_info *flag);
 
 #endif
