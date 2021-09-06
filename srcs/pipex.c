@@ -18,16 +18,75 @@
 ** 2) /pipex user1 "grep hello" "awk '\"{count++} END {print count}\"'" user2 2> user2 
 ** 3) /pipex user1 "grep hello" "awk \"{count++} END {print count}\"" user2 2> user2
 ** 4) /pipex user1 "grep hello" "awk '{count++} END {print count}'" user2 2> user2
+** 5) "awk -F ":" '{ $2 = "" ; print $0 }' /etc/passwd"
+** 6) awk 'END {print NR}'
+** 7) awk 'length($0)>75 {print}'
 */
+
+size_t count_bunch(char *str)
+{
+	size_t	i;
+	size_t	count;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		printf("str[%d] : %c\n", (int)i, str[i]);
+		if (str[i] != ' ' || str[i] != '\"' || str[i] != '\'')
+		{
+			while (str[i] != ' ' && str[i])
+				i++;
+			count++;
+		}
+		// else if ()
+		// {
+		// 	i++;
+		// 	if (str[i] == '\'')
+		// 		i++;
+		// 	while (str[i] != '\"' && str[i])
+		// 		i++;
+		// 	count++;
+		// }
+		// else if (str[i] == '\'')
+		// {
+		// 	i++;
+		// 	if (str[i] == '\"')
+		// 		i++;
+		// 	while (str[i] != '\'' && str[i])
+		// 		i++;
+		// 	count++;
+		// }
+		i++;
+	}
+	return (count);
+}
+
+void	parsing_str(char *str)
+{
+	char	**res;
+	size_t	len;
+
+	(void)res;
+	// if (str == NULL)
+		// return (NULL);
+	printf("str : %s\n", str);
+	len = count_bunch(str);
+	printf("len : %d\n", (int)len);
+}
 
 int	main(int ac, char **av, char **env)
 {
 	t_info	info;
 	// char	*path;
 
-	// (void)env;
+	(void)env;
 	// (void)path;
-	if (ac != 5)
+	if (ac == 2)
+	{
+		parsing_str(av[1]);
+	}
+	else if (ac != 5)
 	{
 		ft_putendl_fd("usage: ./pipex file1 cmd1 cmd2 file2", 2);
 		exit(1);
@@ -37,17 +96,19 @@ int	main(int ac, char **av, char **env)
 		ft_putendl_fd("pipe failed", 2);
 		exit(1);
 	}
-	info.cmd_arg = ft_split(av[2], ' ');
-	printf("info.cmd_arg : %s\n", info.cmd_arg[0]);
-	info.path = part_path(env, &info, info.cmd_arg[0]);
-	printf("info.path : %s\n", info.path);
-	int i = 0;
-	while (info.cmd_arg[i] != NULL)
-		printf("info.cmd_arg : %s\n", info.cmd_arg[i++]);
+
+	// info.cmd_arg = ft_split(av[2], ' ');
+	// printf("info.cmd_arg : %s\n", info.cmd_arg[0]);
+	// info.path = part_path(env, &info, info.cmd_arg[0]);
+	// printf("info.path : %s\n", info.path);
+	// int i = 0;
+	// while (info.cmd_arg[i] != NULL)
+	// 	printf("info.cmd_arg : %s\n", info.cmd_arg[i++]);
 	
 	// pipex_process(&info, av, env);
-	ft_free(&info);
-	close(info.fd_outfile);
-	close(info.fd_infile);
+	// ft_free(&info);
+	// close(info.fd_outfile);
+	// close(info.fd_infile);
 	return (EXIT_SUCCESS);
 }
+
