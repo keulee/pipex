@@ -12,6 +12,14 @@
 
 #include "../includes/pipex.h"
 
+/*
+** have to managed :
+** 1) /pipex user1 "grep hello" "awk \"'{count++} END {print count}'\"" user2 2> user2
+** 2) /pipex user1 "grep hello" "awk '\"{count++} END {print count}\"'" user2 2> user2 
+** 3) /pipex user1 "grep hello" "awk \"{count++} END {print count}\"" user2 2> user2
+** 4) /pipex user1 "grep hello" "awk '{count++} END {print count}'" user2 2> user2
+*/
+
 int	main(int ac, char **av, char **env)
 {
 	t_info	info;
