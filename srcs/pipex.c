@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 20:14:11 by keulee            #+#    #+#             */
-/*   Updated: 2021/09/02 20:14:12 by keulee           ###   ########.fr       */
+/*   Updated: 2021/09/06 17:13:56 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int	main(int ac, char **av, char **env)
 {
 	t_info	info;
+	// char	*path;
 
+	// (void)env;
+	// (void)path;
 	if (ac != 5)
 	{
 		ft_putendl_fd("usage: ./pipex file1 cmd1 cmd2 file2", 2);
@@ -26,7 +29,15 @@ int	main(int ac, char **av, char **env)
 		ft_putendl_fd("pipe failed", 2);
 		exit(1);
 	}
-	pipex_process(&info, av, env);
+	info.cmd_arg = ft_split(av[2], ' ');
+	printf("info.cmd_arg : %s\n", info.cmd_arg[0]);
+	info.path = part_path(env, &info, info.cmd_arg[0]);
+	printf("info.path : %s\n", info.path);
+	int i = 0;
+	while (info.cmd_arg[i] != NULL)
+		printf("info.cmd_arg : %s\n", info.cmd_arg[i++]);
+	
+	// pipex_process(&info, av, env);
 	ft_free(&info);
 	close(info.fd_outfile);
 	close(info.fd_infile);
