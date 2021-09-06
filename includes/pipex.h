@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 20:14:33 by keulee            #+#    #+#             */
-/*   Updated: 2021/09/02 20:14:35 by keulee           ###   ########.fr       */
+/*   Updated: 2021/09/07 00:42:17 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,8 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcpy(char *restrict dest, const char *restrict src, size_t size);
 size_t	ft_strlen(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	**parsing_str(char *str);
+int	ft_tab_len(char const *s, char c, int i);
+size_t count_bunch(char *str);
 
 #endif

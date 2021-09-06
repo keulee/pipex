@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: keulee <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: keulee <keulee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/02 20:14:38 by keulee            #+#    #+#              #
-#    Updated: 2021/09/02 20:14:39 by keulee           ###   ########.fr        #
+#    Updated: 2021/09/07 00:22:25 by keulee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OBJS = $(SRCS:.c=.o)
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 RM = rm -f
 
