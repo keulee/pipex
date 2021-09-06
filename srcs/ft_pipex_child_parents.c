@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 20:11:10 by keulee            #+#    #+#             */
-/*   Updated: 2021/09/07 00:42:43 by keulee           ###   ########.fr       */
+/*   Updated: 2021/09/07 01:51:24 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void	pipex_process(t_info *info, char **av, char **env)
 		parents_process(info, av, env, &pid);
 }
 
+/*
+** pipe[0] -> read / pipe[1] -> write
+** 0 : STDin, 1 : STDout
+*/
+
 void	child_process(t_info *info, char **av, char **env)
 {
 	info->fd_infile = open(av[1], O_RDONLY);
@@ -36,11 +41,10 @@ void	child_process(t_info *info, char **av, char **env)
 		ft_putendl_fd("file1(input) doesn't exist", 2);
 		exit(1);
 	}
-	close(info->fd_pipe[0]); //pipe[0] -> read / pipe[1] -> write
-	dup2(info->fd_pipe[1], STDOUT_FILENO); //0 : STDin, 1 : STDout
+	close(info->fd_pipe[0]);
+	dup2(info->fd_pipe[1], STDOUT_FILENO);
 	close(info->fd_pipe[1]);
 	dup2(info->fd_infile, STDIN_FILENO);
-	// info->cmd_arg = ft_split(av[2], ' ');
 	info->cmd_arg = parsing_str(av[2]);
 	info->path = part_path(env, info, info->cmd_arg[0]);
 	if (execve(info->path, info->cmd_arg, env) == -1)
@@ -60,11 +64,10 @@ void	parents_process(t_info *info, char **av, char **env, pid_t *pid)
 		ft_putendl_fd("file2(output) doesn't exist", 2);
 		exit(1);
 	}
-	close(info->fd_pipe[1]); //pipe[0] -> read / pipe[1] -> write
+	close(info->fd_pipe[1]);
 	dup2(info->fd_pipe[0], STDIN_FILENO);
 	close(info->fd_pipe[0]);
 	dup2(info->fd_outfile, STDOUT_FILENO);
-	// info->cmd_arg = ft_split(av[3], ' ');
 	info->cmd_arg = parsing_str(av[3]);
 	info->path = part_path(env, info, info->cmd_arg[0]);
 	if (execve(info->path, info->cmd_arg, env) == -1)

@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 20:14:33 by keulee            #+#    #+#             */
-/*   Updated: 2021/09/07 00:42:17 by keulee           ###   ########.fr       */
+/*   Updated: 2021/09/07 01:51:52 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 # include <stdio.h>
+
+typedef struct s_parsing {
+	int		len;
+	int		i;
+	int		j;
+	int		count;
+}	t_parsing;
 
 typedef struct s_info {
 	int		fd_infile;
@@ -37,7 +44,6 @@ void	pipex_process(t_info *info, char **av, char **env);
 void	child_process(t_info *info, char **av, char **env);
 void	parents_process(t_info *info, char **av, char **env, pid_t *pid);
 void	ft_free(t_info *info);
-
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_exit_msg(char *str);
@@ -52,8 +58,13 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcpy(char *restrict dest, const char *restrict src, size_t size);
 size_t	ft_strlen(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	**parsing_str(char *str);
-int	ft_tab_len(char const *s, char c, int i);
-size_t count_bunch(char *str);
+char	**parsing_str(const char *str);
+char	**parsing_malloc_str(char *str, char **res, t_parsing *tab);
+int		ft_tab_len(char const *s, char c, int i);
+void	word_count(const char *str, int *i, int *count);
+int		count_bunch(const char *str);
+void	single_quota(char *str, char **res, t_parsing *tab);
+void	double_quota(char *str, char **res, t_parsing *tab);
+void	space_case(char *str, char **res, t_parsing *tab);
 
 #endif

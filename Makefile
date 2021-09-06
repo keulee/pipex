@@ -6,7 +6,7 @@
 #    By: keulee <keulee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/02 20:14:38 by keulee            #+#    #+#              #
-#    Updated: 2021/09/07 00:22:25 by keulee           ###   ########.fr        #
+#    Updated: 2021/09/07 01:48:50 by keulee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,14 @@ SRCS = srcs/pipex.c \
 		 srcs/ft_free_tab2.c srcs/ft_putchar.c srcs/ft_putchar_fd.c \
 		 srcs/ft_putendl_fd.c srcs/ft_putstr.c srcs/ft_putstr_fd.c \
 		 srcs/ft_split.c srcs/ft_strjoin.c srcs/ft_strlcpy.c srcs/ft_strlen.c \
-		 srcs/ft_strncmp.c
+		 srcs/ft_strncmp.c srcs/ft_parsing_path.c srcs/ft_parsing_path_utiles.c
 	
 
 OBJS = $(SRCS:.c=.o)
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 
 RM = rm -f
 
