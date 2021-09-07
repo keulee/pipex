@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 20:16:24 by keulee            #+#    #+#             */
-/*   Updated: 2021/09/07 02:00:28 by keulee           ###   ########.fr       */
+/*   Updated: 2021/09/07 19:50:07 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	ft_heredoc(char **av, char **env, t_info *info)
 	close(pipe_heredoc[1]);
 	dup2(info->fd_pipe[1], STDOUT_FILENO);
 	close(info->fd_pipe[0]);
-	// info->cmd_arg = ft_split(av[3], ' ');
 	info->cmd_arg = parsing_str(av[3]);
 	info->path = part_path(env, info, info->cmd_arg[0]);
 	if (execve(info->path, info->cmd_arg, env) == -1)

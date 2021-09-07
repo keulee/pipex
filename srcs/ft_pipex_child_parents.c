@@ -6,7 +6,7 @@
 /*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 20:11:10 by keulee            #+#    #+#             */
-/*   Updated: 2021/09/07 01:51:24 by keulee           ###   ########.fr       */
+/*   Updated: 2021/09/07 19:41:02 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	child_process(t_info *info, char **av, char **env)
 	{
 		ft_putstr_fd("command not found: ", 2);
 		ft_putendl_fd(info->cmd_arg[0], 2);
+		ft_free(info);
 		exit(1);
 	}
 }
