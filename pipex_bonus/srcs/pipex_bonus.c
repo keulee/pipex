@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 20:19:17 by keulee            #+#    #+#             */
-/*   Updated: 2021/09/02 20:19:18 by keulee           ###   ########.fr       */
+/*   Updated: 2021/09/07 17:45:40 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int ac, char **av, char **env)
 {
 	t_info	info;
 
-	if (ac < 4 || ac > 6)
+	if (ac < 5 || ac > 6)
 	{
 		ft_putendl_fd("usage1: ./pipex here_doc LIMITER cmd cmd1 file", 2);
 		ft_putendl_fd("usage2: ./pipex file1 cmd1 cmd2 file2", 2);
