@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: keulee <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: keulee <keulee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/02 20:20:12 by keulee            #+#    #+#              #
-#    Updated: 2021/09/02 20:21:18 by keulee           ###   ########.fr        #
+#    Updated: 2021/09/07 01:56:39 by keulee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS = srcs/pipex_bonus.c \
 		srcs/ft_putstr_bonus.c srcs/ft_pipex_child_parents_bonus.c \
 		srcs/ft_heredoc_bonus.c srcs/get_next_line_bonus.c \
 		srcs/ft_substr_bonus.c srcs/ft_strchr_bonus.c srcs/ft_strdup_bonus.c \
-		srcs/ft_strcmp_bonus.c
+		srcs/ft_strcmp_bonus.c srcs/ft_parsing_path_bonus.c \
+		srcs/ft_parsing_path_utiles_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 

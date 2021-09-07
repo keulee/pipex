@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: keulee <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: keulee <keulee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 20:20:07 by keulee            #+#    #+#             */
-/*   Updated: 2021/09/02 20:20:09 by keulee           ###   ########.fr       */
+/*   Updated: 2021/09/07 01:57:51 by keulee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # include <stdio.h>
 
 # define BUFFER_SIZE 1
+
+typedef struct s_parsing {
+	int		len;
+	int		i;
+	int		j;
+	int		count;
+}	t_parsing;
 
 typedef struct s_info {
 	int		fd_infile;
@@ -65,5 +72,13 @@ void	ft_heredoc_parents(t_info *info, char **av, char **env, pid_t *pid);
 void	heredoc_precess(int pipe_heredoc[2], char **av);
 int		ft_strcmp(char *s1, char *s2);
 void	heredoc_cmd_check(int ac, char **av, t_info *flag);
+char	**parsing_str(const char *str);
+char	**parsing_malloc_str(char *str, char **res, t_parsing *tab);
+int		ft_tab_len(char const *s, char c, int i);
+void	word_count(const char *str, int *i, int *count);
+int		count_bunch(const char *str);
+void	single_quota(char *str, char **res, t_parsing *tab);
+void	double_quota(char *str, char **res, t_parsing *tab);
+void	space_case(char *str, char **res, t_parsing *tab);
 
 #endif
